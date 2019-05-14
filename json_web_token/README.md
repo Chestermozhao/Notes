@@ -16,7 +16,7 @@
 	- replace session at server side
 	- reduce need of cookie, more safe while confronting CORS
 
-## JWT in Python: pyjwt
+## JWT in Python: [pyjwt](https://pyjwt.readthedocs.io/en/latest/)
 - install: `pip install PyJWT`
 ```python
 	jwt.encode({'some': 'payload'}, private_key, algorithm='RS256')lee
