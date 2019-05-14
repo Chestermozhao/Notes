@@ -14,7 +14,7 @@
 - Advantages
 	- using head to deliver token: makes ajax request more safe than before
 	- replace session at server side
-	- reduce need of cookie, more safe to confront CORS
+	- reduce need of cookie, more safe while confronting CORS
 
 ## JWT in Python: pyjwt
 - install: `pip install PyJWT`
