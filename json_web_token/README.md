@@ -67,6 +67,7 @@
 		```
 		- jwt.InvalidAudienceError
 	- iat: issued at
+		- token birth date tag
 		- type must int
 		```python
 		jwt.encode({'iat': 1371720939}, 'secret')
