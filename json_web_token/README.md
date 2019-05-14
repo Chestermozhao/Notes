@@ -3,7 +3,7 @@
 	- headers
 	```javascript
 		{
-			// alg means secret alg and typ means type
+		    // alg means secret alg and typ means type
 		    // alg default is SHA-256; typ default is JWT
 		    “alg”: “HS256”,
 		    “typ”: “JWT”
