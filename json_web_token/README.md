@@ -40,6 +40,7 @@
 		```
 		- jwt.ExpiredSignatureError
 	- nbf: not before time
+		- holding activities used
 		- jwt.ImmatureSignatureError
 	- iss: issuer of JWT
 		- issuer=(issuer): deliver issuer to match the value of iss
