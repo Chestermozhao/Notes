@@ -11,33 +11,33 @@
 		- Authorization server
 		- Resource server: same as server side or back of server side
 	- 4 Types of Auth
-		- authorization code: most safe
-			-（A）User request server side and server side redirect to Authorization server.
-			-（B）User authorize.
-			-（C）Authorization server take verification_code redirect to specific api.
-			-（D）Server side take verification_code to request Authorization server.
-			-（E）Authorization server check code and return access token and refresh token.
-		- implicit
-			-（A）User request server side and server side redirect to Authorization server.
-			-（B）User authorize.
-			-（C）Redirect specific uri with access_token in fragment.
-			-（D）Redirect server side without access_token in fragment.
-			-（E）Server side return a html and script which could get access_token.
-			-（F）Client request Server side with access_token.
-		- resource owner password credentials
-			-（A）Client request Server Side with account and password.
-			-（B）Server side request Authorization server with account and password.
-			-（C）Authorization server return access_token.
-			-（D）Server side return access_token to Client side.
-			-（E）Server side neednt save password and this model is base on highly mutually trust with Server and Client.
-		- client credentials
-			- Server side request access_token
-			- Authorization server check and return access_token.(Authorization need confirm server side by some ways?)
-			- Its not a classical oauth type.
-	- Refresh token
-		- if access_token expires.
-		- request authorization server with refresh token last time return.
-		- it will receive a new access_token.
+		- authorization code: most safe . 
+			-（A）User request server side and server side redirect to Authorization server.  
+			-（B）User authorize.  
+			-（C）Authorization server take verification_code redirect to specific api.  
+			-（D）Server side take verification_code to request Authorization server.  
+			-（E）Authorization server check code and return access token and refresh token.  
+		- implicit . 
+			-（A）User request server side and server side redirect to Authorization server.  
+			-（B）User authorize.  
+			-（C）Redirect specific uri with access_token in fragment.  
+			-（D）Redirect server side without access_token in fragment.  
+			-（E）Server side return a html and script which could get access_token.  
+			-（F）Client request Server side with access_token.  
+		- resource owner password credentials . 
+			-（A）Client request Server Side with account and password.  
+			-（B）Server side request Authorization server with account and password.  
+			-（C）Authorization server return access_token.  
+			-（D）Server side return access_token to Client side.  
+			-（E）Server side neednt save password and this model is base on highly mutually trust with Server and Client.  
+		- client credentials . 
+			- Server side request access_token . 
+			- Authorization server check and return access_token.(Authorization need confirm server side by some ways?) . 
+			- Its not a classical oauth type.  
+	- Refresh token . 
+		- if access_token expires.  
+		- request authorization server with refresh token last time return.  
+		- it will receive a new access_token.  
 - **How oauth2**
 	-（A）**Client side** need user's authorization.
 	-（B）**User** authorize.
