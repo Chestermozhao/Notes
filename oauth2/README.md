@@ -1,0 +1,49 @@
+## OAuth2
+![oauth2 flow](https://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png)
+- **Why oauth2**
+	- Avoid confront pwd login problems: insecurity
+- **What is oauth2**
+	- Concept Introduction
+		- Third-party application: client side
+		- HTTP service: Server side
+		- Resource Owner: user
+		- User Agent: Browser
+		- Authorization server
+		- Resource server: same as server side or back of server side
+	- 4 Types of Auth
+		- authorization code: most safe
+			-（A）User request server side and server side redirect to Authorization server.
+			-（B）User authorize.
+			-（C）Authorization server take verification_code redirect to specific api.
+			-（D）Server side take verification_code to request Authorization server.
+			-（E）Authorization server check code and return access token and refresh token.
+		- implicit
+			-（A）User request server side and server side redirect to Authorization server.
+			-（B）User authorize.
+			-（C）Redirect specific uri with access_token in fragment.
+			-（D）Redirect server side without access_token in fragment.
+			-（E）Server side return a html and script which could get access_token.
+			-（F）Client request Server side with access_token.
+		- resource owner password credentials
+			-（A）Client request Server Side with account and password.
+			-（B）Server side request Authorization server with account and password.
+			-（C）Authorization server return access_token.
+			-（D）Server side return access_token to Client side.
+			-（E）Server side neednt save password and this model is base on highly mutually trust with Server and Client.
+		- client credentials
+			- Server side request access_token
+			- Authorization server check and return access_token.(Authorization need confirm server side by some ways?)
+			- Its not a classical oauth type.
+	- Refresh token
+		- if access_token expires.
+		- request authorization server with refresh token last time return.
+		- it will receive a new access_token.
+- **How oauth2**
+	-（A）**Client side** need user's authorization.
+	-（B）**User** authorize.
+	-（C）**Client side** take auth to request token from **Authorization server**.
+	-（D）**Authorization server** check the auth and return access token.
+	-（E）**Client side** take access token to request **Server side**.
+	-（F）**Server side** check access token and return resource to **Client side**.
+- [Reference](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
+- [More Information](http://www.bubblecode.net/en/2016/01/22/understanding-oauth2/)
