@@ -1,3 +1,3 @@
-## CoffeeScript
-- [install](https://coffeescript.org/)
+## [CoffeeScript](https://coffeescript.org/)
+- install
   - `npm install --save-dev coffeescript`
