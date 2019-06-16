@@ -8,7 +8,7 @@
 	```python
 	x = "global"
 	def foo():
-		# TODO: global x
+	    # TODO: global x
 	    x = x * 2
 	    print(x)
 	foo()
@@ -21,7 +21,7 @@
 - 以下範例會報錯: 因為局域變量作用域僅在局域
 	```python
 	def foo():
-		# TODO: global y here
+	    # TODO: global y here
 	    y = "local"
 	    # TODO: print y here
 	foo()
