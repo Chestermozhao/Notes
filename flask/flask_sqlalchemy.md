@@ -41,6 +41,7 @@
     # 條件查詢
     User.query.filter_by(username='admin').first()
     ```
+    - [外鍵關聯](https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#simple-relationships)
 - 補充閱讀
     - [flask-sqlalchemy doc](https://flask-sqlalchemy.palletsprojects.com/en/2.x/api/#flask_sqlalchemy.SQLAlchemy)
     - [sqlalchemy doc](https://docs.sqlalchemy.org/en/13/orm/scalar_mapping.html#module-sqlalchemy.orm)
