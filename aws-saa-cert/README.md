@@ -208,3 +208,175 @@
     - provide protection to DDos attack
 - Web application Firewall(WAF)
     - firewall in front of your application, provdie additional protection(SQL inhection)
+
+
+### Create S3 bucket
+- permission
+    - using permission generator gen policies
+        - and paste result to permission content
+- properties
+    - static website hosting
+        - set https certificate
+            - #certificate manager
+
+### certificate manager
+- provision certificate
+    - request a certificate
+        - add domain name
+        - DNS validate
+    - create record for route53
+
+
+### create cloudfront distribution
+- create distribution
+    - origin domain name
+    - alternative domain names
+    - custom SSL certificate
+        - choose certificate manager result
+    - default root object
+
+
+### routing with route53
+- 設定route53指向剛剛的CDN
+
+
+### What is IAM?
+- user, user group, role
+- organization
+- A webservice that allow you to security control individual and group to access your AWS resource
+- Features
+    - shared access
+    - granular permission
+    - secure access EC2
+    - grant permission for user outside of AWS
+    - Payment Card Industry and Data Security Standard Compliance
+    - Log auditing by CloudTrail
+    - Eventually Consistency
+    - Free to user
+- including of name and credential
+    - eg: name --> Bill
+    - credential --> ARN:....
+        - could associate to a user
+            - console password
+            - Access key
+    - Never user root user
+        - even you, just create a IAM administrator user
+- password policy
+    - min length
+    - character types
+    - change password by user
+    - expiration
+    - prevent user using previous pwd
+    - force user contact administrator while expiring
+
+
+### More about IAM
+- Groups
+    - collection of users
+    - user assume permission of group
+    - user could belong to multi group
+    - group could contain user not nested
+- Roles
+    - define permission that could assume from user or resource
+    - allow Ec2 instance to access other resources
+    - grant access for another AWS user account to access your resources
+    - temporarily assume a rule, identity deferation
+        - AWS Cognito
+        - Oauth
+        - SSO
+- Organisation
+    - allow multiple AWS account used by an organisation to be part of OU(organisation unit)
+    - service control policies allow the whitlist and blacklist with OU
+    - blacklist priority higher than user group
+    - Pros
+        - centrally management permission
+        - control access
+        - automate creation and management with APIs
+        - consolidate billing
+- Amazon Resource Name(ARN)
+    - format
+        - arn:aws:iam::account:resource(note region missing, since IAM is global service)
+- User based versus Resource based policies
+    - IAM policy is follow user based
+    - some resources followed resource based policy
+        - s3: ACL
+        - Glacier vault access policy
+        - SNS topics
+        - SQS queue
+        - Key management
+- Identity Federation
+    - outside user get temporailiy access permission
+    - Methods to creating federing users
+        - Cognito
+        - SAML
+        - Oauth
+        - SSO
+        - AWS enterprise access
+- AWS cloudtrail
+    - aws console, sdk, cli all communicate aws service with APIs
+    - AWS log calls from API
+    - logs are stored in bucket for analysis(Athena, EMR)
+    - SNS topic could alert security issues
+
+
+### IAM best practice
+- Lock root user keys
+- create individual user
+- user group to assign user permission
+- grant least privilege
+- use access level to review IAM permissiom
+- configure strict pwd policy to your user
+- enable multiple-factor auth for privileged user
+- delegate by role
+- use role for application that run on ec2
+- rotate credential regularly
+- remove unnecessary credential
+- use policy condition for federation login
+- monitor activity in your account bt CloudTrail
+
+
+### Trusted advisor
+- 好像是會給你infra security的建議跟優化費用建議
+- for enterprise
+
+
+### Elastic Compute Cloud(EC2)
+- purchasing options
+![purchase options](https://img.onl/jhWCKI)
+
+- saving plans
+![saving plan](https://img.onl/19H8s1)
+
+- how to select type of instance purchasing policies
+![purchasing tips](https://img.onl/rzFE0g)
+
+- instance types
+![instance types](https://img.onl/872zGg)
+
+- t2/t3 bustable(CPU credit)
+![burstable CPU credit](https://img.onl/cIM6uZ)
+
+- using ARM
+![using ARM](https://img.onl/9kbxvF)
+
+- EC2 fleet
+![EC2 fleet](https://img.onl/gObVRQ)
+
+- Amazon machine image
+![AMI](https://img.onl/Mr9OGO)
+
+- EC2 states
+![EC2 states](https://img.onl/7WWHZJ)
+
+- EC2 instance lifecycle
+![EC2 instance lifecycle](https://img.onl/kvCAxX)
+
+- EC2 cluster networking
+![EC2 cluster networking](https://img.onl/n6LQXI)
+
+- EC2 storage options
+![EC2 storage options](https://img.onl/Exw8cv)
+![EC2 storage options2](https://img.onl/qWpMVC)
+
+- EC2 connected from remote
+![EC2 connected from remote](https://img.onl/kS2prr)
