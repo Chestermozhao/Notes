@@ -354,12 +354,18 @@
 ![instance types](https://img.onl/872zGg)
 
 - t2/t3 bustable(CPU credit)
+  - 每個小時有固定的credit
+  - 24小時內可以累積
+  - 只要不是0就可以burstable
+  - 如果超出去每分鐘遞減1
+  - 如果到0就代表你可能需要重開別的instance或者換instance type
 ![burstable CPU credit](https://img.onl/cIM6uZ)
 
 - using ARM
 ![using ARM](https://img.onl/9kbxvF)
 
 - EC2 fleet
+  - [docs](https://aws.amazon.com/tw/about-aws/whats-new/2018/04/introducing-amazon-ec2-fleet/#:~:text=Amazon%20EC2%20Fleet%20%E6%98%AF%E4%B8%80,Amazon%20EC2%20%E5%AE%B9%E9%87%8F%E7%9A%84%E7%A8%8B%E5%BA%8F%E3%80%82&text=Amazon%20EC2%20Fleet%20%E7%8F%BE%E5%B7%B2%E9%96%8B%E6%94%BE%E6%89%80%E6%9C%89%E5%85%AC%E6%9C%89%E5%8D%80%E5%9F%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%E3%80%82)
 ![EC2 fleet](https://img.onl/gObVRQ)
 
 - Amazon machine image
@@ -375,6 +381,7 @@
 ![EC2 cluster networking](https://img.onl/n6LQXI)
 
 - EC2 storage options
+  - [different instance type could choose different storage type](https://aws.amazon.com/tw/ec2/instance-types/)
 ![EC2 storage options](https://img.onl/Exw8cv)
 ![EC2 storage options2](https://img.onl/qWpMVC)
 
