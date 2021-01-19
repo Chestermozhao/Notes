@@ -387,3 +387,83 @@
 
 - EC2 connected from remote
 ![EC2 connected from remote](https://img.onl/kS2prr)
+
+---
+### S3 on hands
+- Add policy
+  - Principal for all access
+  - Action for all
+  - Add ARN(optional), set S3 ARN to this field
+  - After choose completed, creating policy
+
+### Database on AWS
+- What is RDS?
+  - Manage relation database service
+  - PG, MySQL, MariaDB, Oracle, MS SQL, Aurora
+  - Paas Service, handling provision, patching, backup, recovery, failure detection and repair
+- Backup
+  - RDS sanpshot
+    - User initiate RDS
+  - backup to S3
+    - Deleted by default
+    - Disable by setting backup retention period to 0
+- Encryption RDS is optional
+- cross multi-AZ
+  - if you open this service, 他會幫你在兩個AZ啟動
+- read replica
+  - 如果流量大需要一個read only的RDS instance
+  - not support for MS SQL and Oracle
+  - canot put bahind AWS ELB
+    - Use arora cluster
+      - route53 routing HaProxy
+- Aurora
+  - MySQL and PGSQL compatibale
+  - faster than MySQL 5 times, 3 times for PG SQL
+  - cluster load balance by aurora service and instance with single reader endpoint
+  - Scale
+    - vertical: resize
+    - horizon: 15 read replicas
+  - Pay by second
+  - sutible for infrequent, intermittent, unpredicable workload
+- DynamoDB
+  - NoSQL DB
+  - consist of
+    - Table: collection
+    - Attribute: field
+    - Items: document
+    - Partition key and sort key: index
+  - autoscaling base on demand
+  - sutible for predict traffic, traffic consistent, capacity requirement can forecast and control costs
+  - specify the number of R & W per second that you expected
+- Neptune
+  - graph DB
+  - purpose build and store data relationship
+  - use graph structure
+    - node
+    - edge
+    - properties store data and those node
+  - graph query language
+    - Gremlin
+    - SPARQL
+- Amazon Redshift
+  - big data(PB level)
+  - base on PG engine
+- ElasticCache
+  - in memory data store service
+  - low latency
+  - Redis or Memcached engine
+  - 可以搭配Dynamo DB做緩存設計
+    - 因為Dynamo DB讀寫計價
+- Amazon document DB
+  - MongoDB compatible
+  - lanched for cluster, up to 16 instances(1 primary and 15 replicas)
+  - 99.99 avalibility
+  - Replica for 6 copies across 3 AZ
+  - continuously backup to S3 and provide up ro 35 days point-in-time recovery with no downtime and performance degeadation
+
+### VPC(Virtual Private Cloud)
+- create ec2 with default VPC
+- internet connectivity
+  - public IP
+  - VPC has an internet gateway
+  - route define in route table from subnet to internet gateway
