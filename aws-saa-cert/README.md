@@ -644,7 +644,8 @@
         - default queue type
         - unlimited number of transaction per second
         - guarantee message us delivered at least once although rarely duplicate
-        - best-effort ordering(不保證輸入輸出順序？)
+        - best-effort ordering: Standard queues provide best-effort ordering which ensures that messages are generally delivered in the same order as they're sent
+	  - A standard queue makes a best effort to preserve the order of messages, but more than one copy of a message might be delivered out of order. If your system requires that order be preserved, we recommend using a FIFO (First-In-First-Out) queue or adding sequencing information in each message so you can reorder the messages when they're received.
     - FIFO
         - limited to 300 transactions per second
         - FIFO delivery
