@@ -467,3 +467,227 @@
   - public IP
   - VPC has an internet gateway
   - route define in route table from subnet to internet gateway
+
+### Cloudformation
+- desing template
+    - you could design your structure here
+    - after design, you will get json or yaml config
+- create stack
+    - With cloudformation, you could design template with GUI platform and create dev-env with yaml file automatically
+- update stack
+    - if you update the json file, you could deploy with this
+
+### CloudWatch
+- metrix of(not avaliable for all regions)
+    - Billing
+    - BynamoDB
+    - EC2, EBS
+    - Elastic Beanstalk
+    - Opworks
+    - Kinesis Firehose
+    - Full list in Developer Guide
+- not only for raw data, support averge, max, min
+- or you could get statistics with API/CLI
+    - maximum number of data points can be required is 50850
+    - maxmium number of data points returned from single request is 1440
+    - if you need collect large data, you need get it with stream method
+- view with console and create dashboard
+- Alarms
+    - Integrates with SNS
+    - three state
+        - OK
+        - ALARM
+        - INSUFFICIENT_DATA
+    - exceed threshold for 3 periods, the alarm is invoked
+- CloudWatch Logs
+    - monitor and store your logs from EC2, CloudTrail, other resources
+    - Real-time monitoring of log infomation
+    - Log streams: sequence of log events from source
+    - Log groups: streams the same retention, monitoringm and access control settings
+    - Metrix filters: define how info is extracted to create data points
+    - Retention settings: how long log events are kept in CloudWatch logs
+- CloudWatch Events
+    - Event
+        - Occur when resources change state
+            - EC2 state changed
+            - Autoscaling
+        - CloudTrail integration
+            - API calls
+            - Log into console
+    - Rules
+        - Match incoming events and route them to one or multi targets for processing
+    - Targets
+        - Lambda
+        - SNS
+        - SQS
+        - Kinesis streams
+
+### Deployment
+- Infrastructure as code
+    - version control
+    - example
+        - Cloudformation templates
+        - Cloudformation Designer
+        - AMI
+            - aws image
+- CD in Application
+    - auto delivery of prod ready code
+    - allows repid deployment and rollback if necessary
+    - example
+        - CodeCommit
+        - CodePipeline
+        - Elastic BeanStalk
+        - OpsWorks
+        - Elastic Container Service(ECS)
+- Both application and Infrastructure
+    - example
+        - CodePipeline
+        - CodeCommit
+        - Elastic BeanStalk
+        - OpsWorks
+        - Elastic Container Service(ECS)
+    - Hybrid Deployments
+        - seperate app and infra deployments
+- Application Updating Options
+    - Prebaking AMIs
+    - In-place Upgrade
+        - Application update on live EC2 instance
+    - Disposable Upgrade
+        - Rolling out new EC2 instance and terminating old one
+        - Allow staged deployment
+- Blue-Green Deployment
+    - Staged rollout from existing env(Blue) while tesing new one(Green)
+    - Using domain name service(DNS) to increase traffic to green env in stages
+    - Requires doubling up on resources
+        - $$
+
+### Using Elastic BeanStalk to lauch multiple environments
+- seems just demo how to switch mapping env and domain
+- but not using same domain name to implement blue-green deployment
+
+### CodePipeline CICD(持續交付/持續整合)
+- Background
+    - Github
+    - Elastic BeanStalk deploy node app
+- source - build - staging - production
+    - just demo from build to staging
+- connect to github repo branch
+- deploy as Elatic BeanStalk
+
+### OpsWorks
+- Introduction
+    - configuration management platform
+    - provide more control over infrastructure design and management then ELB
+    - infrastructure as code using Chief recipes for fine-grained control
+    - consiste of CM model on Stacks Layers Recipes
+- Core entities
+    - Stack
+        - you could imagine the collective of EC2 instances or LBs
+    - Layer
+        - how to set up instance and reosurces
+        - you can mix and match layers, can be used for multiple stacks
+        - must include of more than one instance
+    - Instance
+        - application
+- Scaling
+    - 24/7 instances added to layer can manually start, stop, reboot the corresponding EC2 instances
+    - Auto-scaling
+        - time-base instances base on a schedule
+        - load-base instances base on several load metric(traffic / CPU utilize)
+    - combine 3 types us an effective strategy
+- Chef recipes: 我的想像是可以寫一些配置，不同entity可以複用
+    - Customisation
+    - Redeployment
+    - Version control
+    - Code reuse
+
+### CloudFront(CDN)
+- Introduction
+    - cache regular used content
+    - web service for high performance content delivery
+    - world-wide network of data centres(edge location)
+    - reduces number of hops for requests
+- Edge locations(2016/1)
+    - 16 regions
+    - 42 AZ
+    - 50+ Edge Locations
+- CloudFront Origin Server(資料源頭)
+    - Location of content to be delivered
+    - Origin server is either S3 or HTTP server
+        - HTTP server can be on EC2 instance
+        - webservice you managed
+    - CloudFront must have access to origin server
+- CloudFront Distribution
+    - which origin server to get your files and TTL
+    - assign a domain name to your new distribution
+    - if edge location exist file return, if not it will request origin server and cache at edge location
+    - distribution could be invalidated to force renew data
+- Delivering Dynamic Content
+    - Low TTL
+    - dont cache dynamic content
+    - ![Cloudfront options](https://i.imgur.com/f6OrpTK.jpg)
+
+### SQS
+- Introduction
+    - Queue for storing messages
+    - Acts as buffer of data for processing servers
+    - smooth out the peak demand
+    - Up to 10 attributes can be added to a message additional to the message body
+    - message size can be set 1KB - 256KB
+- Decoupling Processes
+    - If average demand exceeds processing capacity, queue will grow indefinitely
+    - SQS cam provide cloudwatch metrix -> auto scaling
+    - provide upper and lower setpoints
+    - ![SQS structure with EC2](https://i.imgur.com/8R5l0qq.png)
+- Queue Types
+    - Standard
+        - default queue type
+        - unlimited number of transaction per second
+        - guarantee message us delivered at least once although rarely duplicate
+        - best-effort ordering(不保證輸入輸出順序？)
+    - FIFO
+        - limited to 300 transactions per second
+        - FIFO delivery
+        - Exactly once processing
+        - not available for all regions
+- Message Lifecycle
+    - message receive by the SQS
+    - message receive from processing server
+        - visibility timeout starts
+    - message processed by processimg server
+        - visibility timeout ends
+    - visibility timeout
+        - the time which the message is invisible in the queue and has not been deleted
+        - if the message has not been deleted by the visibility timeout period, the message becomes visible and can received again by the processing server
+- Dead Letter Queue
+    - Queue can be target for message that cannot be processed successfully
+    - analysis them or reprocessed later
+    - dead letter queue must in the same region and from same account as queue
+- Delay Queue
+    - Postpone the delivery of new messages
+    - message is not visible when it is first added to the queue for defined period time
+    - 120000 limit got the number of inflight messages per queue
+- Message Timer
+    - initial invisibility period for an individual message
+    - can be created by console or with DelaySeconds parameter of SendMessage
+- Polling
+    - Short Polling send response immediately back whether message in queue or not
+    - Long Polling waits until a message is available in the queue before sending a response
+    - Reduce the number of empty responses when there are no messages available to return
+    - Set WaitTimeSeconds(ReceiveMessage) ot ReceiveMesssageWaitTimeSeconds(CreateQueue/SetQueueAttributes) parameter btw 1-20
+
+### SNS
+- Introduction
+    - Enable to send message up to 256KB to subscribing endpoints or clients
+    - Topic means endpoint of publishers to post messages
+    - Subsribers subsribe to the topic name
+- Transport Protocols
+    - HTTP/HTTPS
+        - notifications will be delivered through an POST to specified URL
+    - Email/Email Json
+    - SQS
+    - SMS
+- Message Format
+    - Email transport only contains the payload(message body)
+- Support SNS mobile push notification
+- Support Amazon Product notification: kindle?
