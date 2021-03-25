@@ -18,6 +18,3 @@ class Solution:
                 p2 += 1
             p1 += 1
         
-        # ...
-        nums1[m:] = nums2
-        nums1.sort()
