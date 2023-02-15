@@ -8,4 +8,4 @@ lxml==4.6.2
 MarkupSafe==1.1.1
 python-saml==2.5.0
 six==1.12.0
-Werkzeug==0.15.4
+Werkzeug==2.2.3
